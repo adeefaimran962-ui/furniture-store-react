@@ -673,3 +673,19 @@ footer > p { text-align: center; border-top: 1px solid #333; padding-top: 20px; 
   .page > section:first-of-type:has(> div) { flex-direction: column; }
   #stat-cards .card { max-width: 100%; }
 }
+
+/* =========================================================
+   DASHBOARD PAGE — shared overrides in global CSS
+========================================================= */
+
+/* link-button used as a <button> element on dashboard header */
+button.link-button {
+  background: transparent;
+  color: var(--brand-accent-color);
+  border: 2px solid var(--brand-accent-color);
+}
+button.link-button:hover {
+  background: var(--brand-accent-color);
+  color: #fff;
+  transform: translateY(-2px);
+}
