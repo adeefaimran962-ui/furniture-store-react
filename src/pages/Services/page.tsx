@@ -1,81 +1,102 @@
 import { useNavigate } from 'react-router-dom';
 
+const btnSm =
+  'inline-flex items-center justify-center gap-2 bg-[#2C2C2C] text-white border-2 border-[#2C2C2C] px-[18px] py-2 text-[0.75rem] font-["Inter"] font-semibold uppercase tracking-[1.5px] rounded-[4px] cursor-pointer transition-all duration-300 hover:bg-[#B8860B] hover:border-[#B8860B] hover:-translate-y-0.5';
+
+const btnLg =
+  'inline-flex items-center justify-center gap-2 bg-[#2C2C2C] text-white border-2 border-[#2C2C2C] px-10 py-4 text-[0.9rem] font-["Inter"] font-semibold uppercase tracking-[1.5px] rounded-[4px] cursor-pointer transition-all duration-300 hover:bg-[#B8860B] hover:border-[#B8860B] hover:-translate-y-0.5';
+
+const catalogue = [
+  { item: 'Modern Sofa',     cat: 'Living Room', mat: 'Premium Fabric',  dim: '220 × 90 cm',  price: '$1,200' },
+  { item: 'Dining Table',    cat: 'Dining Room', mat: 'Solid Oak',       dim: '180 × 90 cm',  price: '$850'   },
+  { item: 'Comfort Chair',   cat: 'Living Room', mat: 'Leather',         dim: '80 × 85 cm',   price: '$420'   },
+  { item: 'Executive Chair', cat: 'Office',      mat: 'Leather',         dim: '65 × 120 cm',  price: '$400'   },
+  { item: 'King Bed Frame',  cat: 'Bedroom',     mat: 'Oak Wood',        dim: '200 × 180 cm', price: '$2,200' },
+  { item: 'Coffee Table',    cat: 'Living Room', mat: 'Tempered Glass',  dim: '120 × 60 cm',  price: '$300'   },
+  { item: 'Bookshelf Unit',  cat: 'Study',       mat: 'Walnut Wood',     dim: '90 × 200 cm',  price: '$550'   },
+  { item: 'Wardrobe',        cat: 'Bedroom',     mat: 'MDF + Oak',       dim: '200 × 220 cm', price: '$1,800' },
+];
+
 export default function Services() {
   const navigate = useNavigate();
   return (
     <>
-      <header>
+      {/* HERO */}
+      <header className="bg-gradient-to-br from-[#FAF9F6] to-[#F4ECE1] text-center px-[5%] pt-[100px] pb-[80px] border-b border-[#EEEEEE] max-[768px]:px-5 max-[768px]:pt-[72px] max-[768px]:pb-14">
         <h4>Our Products</h4>
-        <h1>The Full <span className="accent">Collection</span></h1>
-        <p>Every piece is crafted to perfection — from statement sofas to elegant dining sets.</p>
+        <h1>The Full <span className="text-[#B8860B]">Collection</span></h1>
+        <p className="max-w-[520px] mx-auto mb-8 text-[1.05rem]">
+          Every piece is crafted to perfection — from statement sofas to elegant dining sets.
+        </p>
       </header>
 
-      <main className="page">
-        <section>
+      <main className="min-h-[calc(100vh-70px)] px-[5%] py-12 max-w-[1200px] mx-auto max-[768px]:px-5 max-[768px]:py-8">
+
+        {/* Featured Pieces heading */}
+        <section className="text-center mb-3">
           <h4>Handpicked for You</h4>
           <h2>Featured Pieces</h2>
           <p>Timeless designs for every room in your home.</p>
         </section>
 
-        <div className="card-container">
-          <div className="card">
-            <img src="/images/sofa.jpg" alt="Modern Sofa" />
-            <h3>Modern Sofa</h3>
-            <p>Luxury comfort meets minimalist design. Available in 6 fabric options.</p>
-            <p className="accent">$1,200</p>
-            <button className="sm-button" onClick={() => navigate('/contact')}>Enquire Now</button>
-          </div>
-          <div className="card">
-            <img src="/images/table.jpg" alt="Dining Table" />
-            <h3>Dining Table</h3>
-            <p>Solid oak craftsmanship for family moments. Seats up to 8.</p>
-            <p className="accent">$850</p>
-            <button className="sm-button" onClick={() => navigate('/contact')}>Enquire Now</button>
-          </div>
-          <div className="card">
-            <img src="/images/comfort chair.jpg" alt="Comfort Chair" />
-            <h3>Comfort Chair</h3>
-            <p>Ergonomic design for lasting comfort. Perfect for reading nooks.</p>
-            <p className="accent">$420</p>
-            <button className="sm-button" onClick={() => navigate('/contact')}>Enquire Now</button>
-          </div>
+        {/* Product cards */}
+        <div className="flex flex-wrap justify-center gap-7 my-12 mx-[5%] max-[768px]:mx-0">
+          {[
+            { img: '/images/sofa.jpg',          alt: 'Modern Sofa',   title: 'Modern Sofa',   desc: 'Luxury comfort meets minimalist design. Available in 6 fabric options.', price: '$1,200' },
+            { img: '/images/table.jpg',          alt: 'Dining Table',  title: 'Dining Table',  desc: 'Solid oak craftsmanship for family moments. Seats up to 8.',            price: '$850'   },
+            { img: '/images/comfort chair.jpg',  alt: 'Comfort Chair', title: 'Comfort Chair', desc: 'Ergonomic design for lasting comfort. Perfect for reading nooks.',       price: '$420'   },
+          ].map(({ img, alt, title, desc, price }) => (
+            <div key={title} className="flex flex-col bg-[#FAFAFA] border border-[#EEEEEE] rounded-lg overflow-hidden flex-[1_1_260px] max-w-[320px] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(184,134,11,0.15)] hover:border-[#B8860B] max-[768px]:flex-[1_1_100%] max-[768px]:max-w-full">
+              <img src={img} alt={alt} className="w-full h-[220px] object-cover" />
+              <h3 className="px-5 pt-[18px]">{title}</h3>
+              <p className="px-5 pb-1">{desc}</p>
+              <p className="px-5 text-[#B8860B]">{price}</p>
+              <button className={`${btnSm} mx-5 mb-5 mt-auto`} onClick={() => navigate('/contact')}>Enquire Now</button>
+            </div>
+          ))}
         </div>
 
-        <section>
+        {/* Catalogue heading */}
+        <section className="text-center mb-3">
           <h4>Full Price List</h4>
           <h2>Product Catalogue</h2>
           <p>All prices are inclusive of standard delivery. White-glove service available.</p>
         </section>
 
-        <div className="table-container">
-          <table style={{ minWidth: '620px' }}>
-            <thead>
+        {/* Price table */}
+        <div className="w-full overflow-x-auto mt-5 rounded-lg">
+          <table className="w-full border-collapse rounded-lg overflow-hidden bg-[#FAFAFA] text-[0.9rem]" style={{ minWidth: '620px' }}>
+            <thead className="bg-[#2C2C2C]">
               <tr>
-                <th>Item</th>
-                <th>Category</th>
-                <th>Material</th>
-                <th>Dimensions</th>
-                <th>Price</th>
+                {['Item', 'Category', 'Material', 'Dimensions', 'Price'].map(h => (
+                  <th key={h} className="px-[18px] py-[14px] text-left font-['Inter'] font-semibold text-[0.78rem] text-white uppercase tracking-[1px] whitespace-nowrap">
+                    {h}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              <tr><td>Modern Sofa</td><td>Living Room</td><td>Premium Fabric</td><td>220 × 90 cm</td><td className="accent">$1,200</td></tr>
-              <tr><td>Dining Table</td><td>Dining Room</td><td>Solid Oak</td><td>180 × 90 cm</td><td className="accent">$850</td></tr>
-              <tr><td>Comfort Chair</td><td>Living Room</td><td>Leather</td><td>80 × 85 cm</td><td className="accent">$420</td></tr>
-              <tr><td>Executive Chair</td><td>Office</td><td>Leather</td><td>65 × 120 cm</td><td className="accent">$400</td></tr>
-              <tr><td>King Bed Frame</td><td>Bedroom</td><td>Oak Wood</td><td>200 × 180 cm</td><td className="accent">$2,200</td></tr>
-              <tr><td>Coffee Table</td><td>Living Room</td><td>Tempered Glass</td><td>120 × 60 cm</td><td className="accent">$300</td></tr>
-              <tr><td>Bookshelf Unit</td><td>Study</td><td>Walnut Wood</td><td>90 × 200 cm</td><td className="accent">$550</td></tr>
-              <tr><td>Wardrobe</td><td>Bedroom</td><td>MDF + Oak</td><td>200 × 220 cm</td><td className="accent">$1,800</td></tr>
+              {catalogue.map(({ item, cat, mat, dim, price }) => (
+                <tr key={item}>
+                  <td className="px-[18px] py-[13px] text-[#4A4A4A] border-b border-[#EEEEEE] align-middle break-words max-w-[280px]">{item}</td>
+                  <td className="px-[18px] py-[13px] text-[#4A4A4A] border-b border-[#EEEEEE] align-middle">{cat}</td>
+                  <td className="px-[18px] py-[13px] text-[#4A4A4A] border-b border-[#EEEEEE] align-middle">{mat}</td>
+                  <td className="px-[18px] py-[13px] text-[#4A4A4A] border-b border-[#EEEEEE] align-middle">{dim}</td>
+                  <td className="px-[18px] py-[13px] border-b border-[#EEEEEE] align-middle text-[#B8860B]">{price}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
 
-        <section>
+        {/* Custom sizing CTA box */}
+        <div className="bg-[#FAFAFA] border border-[#EEEEEE] rounded-lg p-9 text-center mt-5 mx-[5%] max-[768px]:mx-0">
           <h2>Need Custom Sizing?</h2>
-          <p>We offer bespoke furniture tailored to your exact space and style requirements.</p>
-          <button className="lg-button" onClick={() => navigate('/contact')}>Request Custom Quote</button>
-        </section>
+          <p className="max-w-[500px] mx-auto mb-6">
+            We offer bespoke furniture tailored to your exact space and style requirements.
+          </p>
+          <button className={btnLg} onClick={() => navigate('/contact')}>Request Custom Quote</button>
+        </div>
       </main>
     </>
   );

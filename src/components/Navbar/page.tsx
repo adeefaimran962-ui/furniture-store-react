@@ -13,7 +13,7 @@ export default function Navbar() {
     localStorage.setItem('decora-theme', theme);
   }, [theme]);
 
-  const toggleTheme = () => setTheme(t => t === 'dark' ? 'light' : 'dark');
+  const toggleTheme = () => setTheme(t => (t === 'dark' ? 'light' : 'dark'));
 
   useEffect(() => {
     const close = (e: MouseEvent) => {
@@ -24,28 +24,75 @@ export default function Navbar() {
     return () => document.removeEventListener('click', close);
   }, []);
 
-  return (
-    <nav>
-      <Link to="/">DECORA</Link>
+  const linkCls =
+    'font-["Inter"] text-[0.8rem] font-semibold tracking-[1px] uppercase text-[var(--text-primary)] px-[10px] py-[6px] rounded block transition-colors duration-300 hover:text-[#B8860B]';
 
-      <button className="menu-toggle" onClick={() => setMenuOpen(o => !o)}>
-        <span /><span /><span />
+  return (
+    <nav className="flex items-center justify-between px-[5%] h-[70px] bg-[var(--bg-main)] border-b border-[var(--border-muted)] sticky top-0 z-[1000] shadow-[0_2px_12px_rgba(0,0,0,0.06)] md:px-[5%] relative">
+
+      {/* Brand */}
+      <Link
+        to="/"
+        className="font-['Playfair_Display'] text-[1.5rem] font-bold text-[var(--text-primary)] tracking-[2px] shrink-0 hover:text-[var(--text-primary)] max-[480px]:text-[1.2rem]"
+      >
+        DECORA
+      </Link>
+
+      {/* Hamburger */}
+      <button
+        className="md:hidden flex flex-col gap-[5px] cursor-pointer bg-transparent border-none p-[6px]"
+        onClick={() => setMenuOpen(o => !o)}
+        aria-label="Toggle menu"
+      >
+        <span className="block w-6 h-[2px] bg-[var(--text-primary)] rounded-sm transition-all duration-300" />
+        <span className="block w-6 h-[2px] bg-[var(--text-primary)] rounded-sm transition-all duration-300" />
+        <span className="block w-6 h-[2px] bg-[var(--text-primary)] rounded-sm transition-all duration-300" />
       </button>
 
-      <ul className={menuOpen ? 'open' : ''}>
-        <li><Link to="/"         onClick={() => setMenuOpen(false)}>Home</Link></li>
-        <li><Link to="/about"    onClick={() => setMenuOpen(false)}>About</Link></li>
-        <li><Link to="/services" onClick={() => setMenuOpen(false)}>Collection</Link></li>
-        <li><Link to="/dashboard" onClick={() => setMenuOpen(false)}>Dashboard</Link></li>
-        <li><Link to="/contact"  onClick={() => setMenuOpen(false)}>Contact</Link></li>
-        <li><Link to="/login"    onClick={() => setMenuOpen(false)}>Login</Link></li>
-        <li>
-          <button onClick={() => { navigate('/signup'); setMenuOpen(false); }}>
+      {/* Nav links */}
+      <ul
+        className={[
+          'list-none m-0 p-0 items-center gap-1',
+          /* desktop */
+          'md:flex',
+          /* mobile */
+          menuOpen
+            ? 'flex flex-col items-start gap-0 absolute top-[70px] left-0 right-0 bg-[var(--bg-main)] py-3 border-t-2 border-[#B8860B] shadow-[0_8px_20px_rgba(0,0,0,0.1)] z-[998]'
+            : 'hidden md:flex',
+        ].join(' ')}
+      >
+        {[
+          { to: '/',          label: 'Home' },
+          { to: '/about',     label: 'About' },
+          { to: '/services',  label: 'Collection' },
+          { to: '/dashboard', label: 'Dashboard' },
+          { to: '/contact',   label: 'Contact' },
+          { to: '/login',     label: 'Login' },
+        ].map(({ to, label }) => (
+          <li key={to} className="relative md:static w-full md:w-auto">
+            <Link to={to} className={linkCls} onClick={() => setMenuOpen(false)}>
+              {label}
+            </Link>
+          </li>
+        ))}
+
+        {/* Join Now */}
+        <li className="w-full md:w-auto">
+          <button
+            className="bg-[#B8860B] border-[#B8860B] text-white px-5 py-2 text-[0.75rem] font-semibold uppercase tracking-[1.5px] border-2 rounded-[4px] cursor-pointer transition-all duration-300 hover:bg-[#8B6508] hover:border-[#8B6508] font-['Inter'] inline-flex items-center justify-center ml-2 md:ml-0"
+            onClick={() => { navigate('/signup'); setMenuOpen(false); }}
+          >
             Join Now
           </button>
         </li>
-        <li>
-          <button id="theme-toggle" onClick={toggleTheme}>
+
+        {/* Theme toggle */}
+        <li className="w-full md:w-auto">
+          <button
+            id="theme-toggle"
+            className="bg-transparent border border-[#ccc] text-[var(--text-primary)] px-[10px] py-[6px] text-base cursor-pointer transition-all duration-300 hover:bg-black/5 hover:border-[#999] hover:translate-y-0 rounded-[4px] font-['Inter'] inline-flex items-center justify-center ml-1 md:ml-0"
+            onClick={toggleTheme}
+          >
             {theme === 'dark' ? '☀️' : '🌙'}
           </button>
         </li>
