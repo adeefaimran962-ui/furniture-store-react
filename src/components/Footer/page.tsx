@@ -7,15 +7,19 @@ export default function Footer() {
 
         {/* Brand */}
         <div className="flex-[1_1_200px] flex flex-col gap-[10px]">
-          <h1 className="text-[1.8rem] text-white m-0 font-['Playfair_Display']">DECORA</h1>
-          <p className="text-[0.85rem] text-[#888] m-0 leading-relaxed">
+          <span className="font-['Playfair_Display'] text-[1.8rem] font-bold text-white leading-tight">
+            DECORA
+          </span>
+          <p className="text-[0.85rem] text-[#888] leading-relaxed m-0">
             Luxury furniture for modern living.<br />Crafted with passion since 2004.
           </p>
         </div>
 
         {/* Navigate */}
         <div className="flex-[1_1_200px] flex flex-col gap-[10px]">
-          <h2 className="text-[0.85rem] font-bold text-white uppercase tracking-[1.5px] mb-2 font-['Inter']">Navigate</h2>
+          <span className="text-[0.85rem] font-bold text-white uppercase tracking-[1.5px] mb-2 font-['Inter']">
+            Navigate
+          </span>
           {[
             { to: '/',         label: 'Home' },
             { to: '/about',    label: 'About' },
@@ -30,7 +34,9 @@ export default function Footer() {
 
         {/* Account */}
         <div className="flex-[1_1_200px] flex flex-col gap-[10px]">
-          <h2 className="text-[0.85rem] font-bold text-white uppercase tracking-[1.5px] mb-2 font-['Inter']">Account</h2>
+          <span className="text-[0.85rem] font-bold text-white uppercase tracking-[1.5px] mb-2 font-['Inter']">
+            Account
+          </span>
           {[
             { to: '/login',     label: 'Login' },
             { to: '/signup',    label: 'Sign Up' },
@@ -44,10 +50,12 @@ export default function Footer() {
 
         {/* Contact */}
         <div className="flex-[1_1_200px] flex flex-col gap-[10px]">
-          <h2 className="text-[0.85rem] font-bold text-white uppercase tracking-[1.5px] mb-2 font-['Inter']">Contact</h2>
-          <p className="text-[0.85rem] text-[#888] m-0 leading-relaxed">📍 45 Design District, Milano</p>
-          <p className="text-[0.85rem] text-[#888] m-0 leading-relaxed">📞 +1 (555) 123-4567</p>
-          <p className="text-[0.85rem] text-[#888] m-0 leading-relaxed">✉️ hello@decora.com</p>
+          <span className="text-[0.85rem] font-bold text-white uppercase tracking-[1.5px] mb-2 font-['Inter']">
+            Contact
+          </span>
+          <p className="text-[0.85rem] text-[#888] leading-relaxed m-0">📍 45 Design District, Milano</p>
+          <p className="text-[0.85rem] text-[#888] leading-relaxed m-0">📞 +1 (555) 123-4567</p>
+          <p className="text-[0.85rem] text-[#888] leading-relaxed m-0">✉️ hello@decora.com</p>
         </div>
       </div>
 

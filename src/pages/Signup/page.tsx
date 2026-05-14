@@ -1,8 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 
-const inputCls =
-  'w-full px-[14px] py-[11px] font-["Inter"] text-[0.9rem] bg-[var(--bg-main)] text-[var(--text-primary)] border border-[#EEEEEE] rounded-[4px] transition-all duration-300 focus:outline-none focus:border-[#B8860B] focus:shadow-[0_0_0_3px_rgba(184,134,11,0.15)] box-border';
+/* ── Shared typography ── */
+const h2Cls = "font-['Playfair_Display'] text-[clamp(1.3rem,3vw,2rem)] font-semibold mb-2 text-[#1A1A1A]";
+const pCls  = "text-[0.95rem] leading-[1.8] text-[#4A4A4A] mb-3";
 
+/* ── Shared form styles ── */
+const inputCls =
+  'w-full px-[14px] py-[11px] font-["Inter"] text-[0.9rem] bg-white text-[#1A1A1A] border border-[#EEEEEE] rounded-[4px] transition-all duration-300 focus:outline-none focus:border-[#B8860B] focus:shadow-[0_0_0_3px_rgba(184,134,11,0.15)] box-border';
 const labelCls =
   'block text-[0.8rem] font-semibold text-[#4A4A4A] mb-1.5 uppercase tracking-[0.5px] font-["Inter"]';
 
@@ -21,8 +25,8 @@ export default function Signup() {
         {/* Header */}
         <div className="text-center mb-7">
           <div className="text-[2.2rem] mb-2">✨</div>
-          <h2>Create Account</h2>
-          <p>Join DECORA and discover premium living</p>
+          <h2 className={h2Cls}>Create Account</h2>
+          <p className={pCls}>Join DECORA and discover premium living</p>
         </div>
 
         <form onSubmit={handleSignup} className="flex flex-col gap-4">
@@ -59,7 +63,7 @@ export default function Signup() {
           </button>
         </form>
 
-        <p className="text-center mt-5 text-[0.9rem]">
+        <p className="text-center mt-5 text-[0.9rem] text-[#4A4A4A]">
           Already have an account?{' '}
           <a
             onClick={() => navigate('/login')}

@@ -1,92 +1,66 @@
+/* ── Google Fonts ── */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ── Tailwind CSS ── */
 @import "tailwindcss";
 
-/* ── Dark-mode variant: triggered by data-theme="dark" on <body> ── */
+/* ── Dark-mode variant: data-theme="dark" on <body> ── */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-/* ── Design tokens (kept for Chart.js color refs + dark-mode overrides) ── */
-:root {
-  --brand-primary:   #B8860B;
-  --brand-secondary: #8B6508;
-  --brand-third:     #F4ECE1;
-  --brand-fourth:    #FAF9F6;
-  --brand-accent:    #2C2C2C;
-  --bg-main:         #FFFFFF;
-  --bg-card:         #FAFAFA;
-  --border-muted:    #EEEEEE;
-  --text-primary:    #1A1A1A;
-  --text-secondary:  #4A4A4A;
-  --text-muted:      #999999;
-  --transition:      0.3s ease;
+/* ── Design tokens via @theme (Tailwind v4 way) ── */
+@theme {
+  --color-brand:        #B8860B;
+  --color-brand-dark:   #8B6508;
+  --color-brand-accent: #2C2C2C;
+  --color-bg-main:      #FFFFFF;
+  --color-bg-card:      #FAFAFA;
+  --color-border-muted: #EEEEEE;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #4A4A4A;
+  --color-text-muted:   #999999;
+  --font-serif: 'Playfair Display', serif;
+  --font-sans:  'Inter', sans-serif;
 }
 
-[data-theme="dark"] {
-  --bg-main:        #111111;
-  --bg-card:        #1E1E1E;
-  --text-primary:   #F0EDE8;
-  --text-secondary: #CCBBAA;
-  --text-muted:     #888880;
-  --border-muted:   #2A2A2A;
-  --brand-primary:  #D4A017;
+/* ── Base layer: global resets & dark-mode token overrides ── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-bg-main, #ffffff);
+    color: var(--color-text-primary, #1a1a1a);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  [data-theme="dark"] {
+    --color-bg-main:        #111111;
+    --color-bg-card:        #1E1E1E;
+    --color-text-primary:   #F0EDE8;
+    --color-text-secondary: #CCBBAA;
+    --color-text-muted:     #888880;
+    --color-border-muted:   #2A2A2A;
+    --color-brand:          #D4A017;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 }
 
-/* ── Global resets ── */
-*, *::before, *::after { box-sizing: border-box; }
+/* ── Utilities layer: chart canvas + table striping ── */
+@layer utilities {
+  .chart-box canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
 
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  background: var(--bg-main);
-  color: var(--text-primary);
-  transition: background var(--transition), color var(--transition);
+  table tbody tr:nth-child(odd)  { background-color: #FAFAFA; }
+  table tbody tr:nth-child(even) { background-color: #FAF9F6; }
+  table tbody tr:hover           { background-color: #F4ECE1; cursor: pointer; }
+  table tbody tr:last-child td   { border-bottom: none; }
 }
-
-a { text-decoration: none; color: inherit; }
-
-/* ── Typography (clamp sizes can't be done with plain Tailwind) ── */
-h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  font-weight: 700;
-  line-height: 1.2;
-  margin: 0 0 0.5rem;
-  color: var(--text-primary);
-}
-h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.3rem, 3vw, 2rem);
-  font-weight: 600;
-  margin: 0 0 0.5rem;
-  color: var(--text-primary);
-}
-h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1rem, 2vw, 1.3rem);
-  font-weight: 600;
-  margin: 0 0 0.4rem;
-  color: var(--text-primary);
-}
-h4 {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin: 0 0 0.4rem;
-  color: var(--text-muted);
-}
-p {
-  font-size: 0.95rem;
-  line-height: 1.8;
-  color: var(--text-secondary);
-  margin: 0 0 0.75rem;
-}
-
-/* ── Chart.js canvas fill ── */
-.chart-box canvas { width: 100% !important; height: 100% !important; }
-
-/* ── Table striping (nth-child can't be done inline) ── */
-table tbody tr:nth-child(odd)  { background: var(--bg-card); }
-table tbody tr:nth-child(even) { background: var(--brand-fourth); }
-table tbody tr:hover           { background: var(--brand-third); cursor: pointer; }
-table tbody tr:last-child td   { border-bottom: none; }

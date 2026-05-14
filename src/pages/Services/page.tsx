@@ -1,8 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 
+/* ── Shared typography ── */
+const h1Cls = "font-['Playfair_Display'] text-[clamp(2rem,5vw,3.2rem)] font-bold leading-[1.2] mb-2 text-[#1A1A1A]";
+const h2Cls = "font-['Playfair_Display'] text-[clamp(1.3rem,3vw,2rem)] font-semibold mb-2 text-[#1A1A1A]";
+const h3Cls = "font-['Playfair_Display'] text-[clamp(1rem,2vw,1.3rem)] font-semibold mb-1.5 text-[#1A1A1A]";
+const h4Cls = "font-['Inter'] text-[0.8rem] font-semibold uppercase tracking-[2px] mb-1.5 text-[#999999]";
+const pCls  = "text-[0.95rem] leading-[1.8] text-[#4A4A4A] mb-3";
+
+/* ── Shared buttons ── */
 const btnSm =
   'inline-flex items-center justify-center gap-2 bg-[#2C2C2C] text-white border-2 border-[#2C2C2C] px-[18px] py-2 text-[0.75rem] font-["Inter"] font-semibold uppercase tracking-[1.5px] rounded-[4px] cursor-pointer transition-all duration-300 hover:bg-[#B8860B] hover:border-[#B8860B] hover:-translate-y-0.5';
-
 const btnLg =
   'inline-flex items-center justify-center gap-2 bg-[#2C2C2C] text-white border-2 border-[#2C2C2C] px-10 py-4 text-[0.9rem] font-["Inter"] font-semibold uppercase tracking-[1.5px] rounded-[4px] cursor-pointer transition-all duration-300 hover:bg-[#B8860B] hover:border-[#B8860B] hover:-translate-y-0.5';
 
@@ -23,9 +30,11 @@ export default function Services() {
     <>
       {/* HERO */}
       <header className="bg-gradient-to-br from-[#FAF9F6] to-[#F4ECE1] text-center px-[5%] pt-[100px] pb-[80px] border-b border-[#EEEEEE] max-[768px]:px-5 max-[768px]:pt-[72px] max-[768px]:pb-14">
-        <h4>Our Products</h4>
-        <h1>The Full <span className="text-[#B8860B]">Collection</span></h1>
-        <p className="max-w-[520px] mx-auto mb-8 text-[1.05rem]">
+        <h4 className={h4Cls}>Our Products</h4>
+        <h1 className={h1Cls}>
+          The Full <span className="text-[#B8860B]">Collection</span>
+        </h1>
+        <p className={`${pCls} max-w-[520px] mx-auto mb-8 text-[1.05rem]`}>
           Every piece is crafted to perfection — from statement sofas to elegant dining sets.
         </p>
       </header>
@@ -34,23 +43,23 @@ export default function Services() {
 
         {/* Featured Pieces heading */}
         <section className="text-center mb-3">
-          <h4>Handpicked for You</h4>
-          <h2>Featured Pieces</h2>
-          <p>Timeless designs for every room in your home.</p>
+          <h4 className={h4Cls}>Handpicked for You</h4>
+          <h2 className={h2Cls}>Featured Pieces</h2>
+          <p className={pCls}>Timeless designs for every room in your home.</p>
         </section>
 
         {/* Product cards */}
         <div className="flex flex-wrap justify-center gap-7 my-12 mx-[5%] max-[768px]:mx-0">
           {[
-            { img: '/images/sofa.jpg',          alt: 'Modern Sofa',   title: 'Modern Sofa',   desc: 'Luxury comfort meets minimalist design. Available in 6 fabric options.', price: '$1,200' },
-            { img: '/images/table.jpg',          alt: 'Dining Table',  title: 'Dining Table',  desc: 'Solid oak craftsmanship for family moments. Seats up to 8.',            price: '$850'   },
-            { img: '/images/comfort chair.jpg',  alt: 'Comfort Chair', title: 'Comfort Chair', desc: 'Ergonomic design for lasting comfort. Perfect for reading nooks.',       price: '$420'   },
+            { img: '/images/sofa.jpg',         alt: 'Modern Sofa',   title: 'Modern Sofa',   desc: 'Luxury comfort meets minimalist design. Available in 6 fabric options.', price: '$1,200' },
+            { img: '/images/table.jpg',         alt: 'Dining Table',  title: 'Dining Table',  desc: 'Solid oak craftsmanship for family moments. Seats up to 8.',            price: '$850'   },
+            { img: '/images/comfort chair.jpg', alt: 'Comfort Chair', title: 'Comfort Chair', desc: 'Ergonomic design for lasting comfort. Perfect for reading nooks.',       price: '$420'   },
           ].map(({ img, alt, title, desc, price }) => (
             <div key={title} className="flex flex-col bg-[#FAFAFA] border border-[#EEEEEE] rounded-lg overflow-hidden flex-[1_1_260px] max-w-[320px] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(184,134,11,0.15)] hover:border-[#B8860B] max-[768px]:flex-[1_1_100%] max-[768px]:max-w-full">
               <img src={img} alt={alt} className="w-full h-[220px] object-cover" />
-              <h3 className="px-5 pt-[18px]">{title}</h3>
-              <p className="px-5 pb-1">{desc}</p>
-              <p className="px-5 text-[#B8860B]">{price}</p>
+              <h3 className={`${h3Cls} px-5 pt-[18px]`}>{title}</h3>
+              <p className={`${pCls} px-5 pb-1`}>{desc}</p>
+              <p className="text-[0.95rem] leading-[1.8] mb-3 px-5 text-[#B8860B]">{price}</p>
               <button className={`${btnSm} mx-5 mb-5 mt-auto`} onClick={() => navigate('/contact')}>Enquire Now</button>
             </div>
           ))}
@@ -58,9 +67,9 @@ export default function Services() {
 
         {/* Catalogue heading */}
         <section className="text-center mb-3">
-          <h4>Full Price List</h4>
-          <h2>Product Catalogue</h2>
-          <p>All prices are inclusive of standard delivery. White-glove service available.</p>
+          <h4 className={h4Cls}>Full Price List</h4>
+          <h2 className={h2Cls}>Product Catalogue</h2>
+          <p className={pCls}>All prices are inclusive of standard delivery. White-glove service available.</p>
         </section>
 
         {/* Price table */}
@@ -91,8 +100,8 @@ export default function Services() {
 
         {/* Custom sizing CTA box */}
         <div className="bg-[#FAFAFA] border border-[#EEEEEE] rounded-lg p-9 text-center mt-5 mx-[5%] max-[768px]:mx-0">
-          <h2>Need Custom Sizing?</h2>
-          <p className="max-w-[500px] mx-auto mb-6">
+          <h2 className={h2Cls}>Need Custom Sizing?</h2>
+          <p className={`${pCls} max-w-[500px] mx-auto mb-6`}>
             We offer bespoke furniture tailored to your exact space and style requirements.
           </p>
           <button className={btnLg} onClick={() => navigate('/contact')}>Request Custom Quote</button>

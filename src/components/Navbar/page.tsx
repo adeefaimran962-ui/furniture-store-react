@@ -28,75 +28,87 @@ export default function Navbar() {
     'font-["Inter"] text-[0.8rem] font-semibold tracking-[1px] uppercase text-[var(--text-primary)] px-[10px] py-[6px] rounded block transition-colors duration-300 hover:text-[#B8860B]';
 
   return (
-    <nav className="flex items-center justify-between px-[5%] h-[70px] bg-[var(--bg-main)] border-b border-[var(--border-muted)] sticky top-0 z-[1000] shadow-[0_2px_12px_rgba(0,0,0,0.06)] md:px-[5%] relative">
+<nav className="flex items-center justify-between px-[5%] h-[70px] sticky top-0 z-[1000] bg-white/95 dark:bg-black/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
+  {/* Brand */}
+  <Link
+    to="/"
+    className="font-['Playfair_Display'] text-[1.5rem] font-bold text-[var(--text-primary)] tracking-[2px] shrink-0 max-[480px]:text-[1.2rem]"
+  >
+    DECORA
+  </Link>
 
-      {/* Brand */}
-      <Link
-        to="/"
-        className="font-['Playfair_Display'] text-[1.5rem] font-bold text-[var(--text-primary)] tracking-[2px] shrink-0 hover:text-[var(--text-primary)] max-[480px]:text-[1.2rem]"
-      >
-        DECORA
-      </Link>
+  {/* Hamburger */}
+  <button
+    className="md:hidden flex flex-col justify-center gap-[5px] bg-transparent border-none cursor-pointer z-[1001]"
+    onClick={() => setMenuOpen(!menuOpen)}
+    aria-label="Toggle menu"
+  >
+    <span
+      className={`block w-6 h-[2px] bg-[var(--text-primary)] transition-all duration-300 ${
+        menuOpen ? "rotate-45 translate-y-[7px]" : ""
+      }`}
+    />
+    <span
+      className={`block w-6 h-[2px] bg-[var(--text-primary)] transition-all duration-300 ${
+        menuOpen ? "opacity-0" : ""
+      }`}
+    />
+    <span
+      className={`block w-6 h-[2px] bg-[var(--text-primary)] transition-all duration-300 ${
+        menuOpen ? "-rotate-45 -translate-y-[7px]" : ""
+      }`}
+    />
+  </button>
 
-      {/* Hamburger */}
+  {/* Nav Links */}
+  <ul
+    className={`${
+      menuOpen ? "flex" : "hidden"
+    } md:flex flex-col md:flex-row absolute md:static top-[70px] left-0 w-full md:w-auto bg-[var(--bg-main)] md:bg-transparent shadow-md md:shadow-none border-t md:border-0 border-gray-200 items-start md:items-center gap-1 md:gap-2 py-4 md:py-0 px-[5%] md:px-0 z-[999]`}
+  >
+    {[
+      { to: "/", label: "Home" },
+      { to: "/about", label: "About" },
+      { to: "/services", label: "Collection" },
+      { to: "/dashboard", label: "Dashboard" },
+      { to: "/contact", label: "Contact" },
+      { to: "/login", label: "Login" },
+    ].map(({ to, label }) => (
+      <li key={to} className="w-full md:w-auto">
+        <Link
+          to={to}
+          className={`${linkCls} block w-full md:w-auto`}
+          onClick={() => setMenuOpen(false)}
+        >
+          {label}
+        </Link>
+      </li>
+    ))}
+
+    {/* Join Button */}
+    <li className="w-full md:w-auto mt-2 md:mt-0">
       <button
-        className="md:hidden flex flex-col gap-[5px] cursor-pointer bg-transparent border-none p-[6px]"
-        onClick={() => setMenuOpen(o => !o)}
-        aria-label="Toggle menu"
+        className="bg-[#B8860B] border-2 border-[#B8860B] text-white px-5 py-2 text-[0.75rem] font-semibold uppercase tracking-[1.5px] rounded-[4px] transition-all duration-300 hover:bg-[#8B6508] hover:border-[#8B6508] w-full md:w-auto"
+        onClick={() => {
+          navigate("/signup");
+          setMenuOpen(false);
+        }}
       >
-        <span className="block w-6 h-[2px] bg-[var(--text-primary)] rounded-sm transition-all duration-300" />
-        <span className="block w-6 h-[2px] bg-[var(--text-primary)] rounded-sm transition-all duration-300" />
-        <span className="block w-6 h-[2px] bg-[var(--text-primary)] rounded-sm transition-all duration-300" />
+        Join Now
       </button>
+    </li>
 
-      {/* Nav links */}
-      <ul
-        className={[
-          'list-none m-0 p-0 items-center gap-1',
-          /* desktop */
-          'md:flex',
-          /* mobile */
-          menuOpen
-            ? 'flex flex-col items-start gap-0 absolute top-[70px] left-0 right-0 bg-[var(--bg-main)] py-3 border-t-2 border-[#B8860B] shadow-[0_8px_20px_rgba(0,0,0,0.1)] z-[998]'
-            : 'hidden md:flex',
-        ].join(' ')}
+    {/* Theme Toggle */}
+    <li className="w-full md:w-auto mt-2 md:mt-0">
+      <button
+        id="theme-toggle"
+        className="border border-gray-300 text-[var(--text-primary)] px-[10px] py-[6px] rounded-[4px] transition-all duration-300 hover:bg-black/5 w-full md:w-auto"
+        onClick={toggleTheme}
       >
-        {[
-          { to: '/',          label: 'Home' },
-          { to: '/about',     label: 'About' },
-          { to: '/services',  label: 'Collection' },
-          { to: '/dashboard', label: 'Dashboard' },
-          { to: '/contact',   label: 'Contact' },
-          { to: '/login',     label: 'Login' },
-        ].map(({ to, label }) => (
-          <li key={to} className="relative md:static w-full md:w-auto">
-            <Link to={to} className={linkCls} onClick={() => setMenuOpen(false)}>
-              {label}
-            </Link>
-          </li>
-        ))}
-
-        {/* Join Now */}
-        <li className="w-full md:w-auto">
-          <button
-            className="bg-[#B8860B] border-[#B8860B] text-white px-5 py-2 text-[0.75rem] font-semibold uppercase tracking-[1.5px] border-2 rounded-[4px] cursor-pointer transition-all duration-300 hover:bg-[#8B6508] hover:border-[#8B6508] font-['Inter'] inline-flex items-center justify-center ml-2 md:ml-0"
-            onClick={() => { navigate('/signup'); setMenuOpen(false); }}
-          >
-            Join Now
-          </button>
-        </li>
-
-        {/* Theme toggle */}
-        <li className="w-full md:w-auto">
-          <button
-            id="theme-toggle"
-            className="bg-transparent border border-[#ccc] text-[var(--text-primary)] px-[10px] py-[6px] text-base cursor-pointer transition-all duration-300 hover:bg-black/5 hover:border-[#999] hover:translate-y-0 rounded-[4px] font-['Inter'] inline-flex items-center justify-center ml-1 md:ml-0"
-            onClick={toggleTheme}
-          >
-            {theme === 'dark' ? '☀️' : '🌙'}
-          </button>
-        </li>
-      </ul>
-    </nav>
+        {theme === "dark" ? "☀️" : "🌙"}
+      </button>
+    </li>
+  </ul>
+</nav>
   );
 }
